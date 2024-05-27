@@ -1,0 +1,151 @@
+{
+  "id": "5c1b0a6c-5ae4-4c1b-ac40-a3209aa63eee",
+  "description": "Mobile Package 1",
+  "isInstallable": true,
+  "lastUpdate": "2023-08-24T07:39:03.717Z",
+  "lifecycleStatus": "launched",
+  "name": "Mobile Package 1",
+  "statusReason": "Product Offering initial creation",
+  "version": "1.0.0",
+  "bundledProductOffering": [
+    {
+      "id": "a2b81357-1ccf-40ba-89d4-f692b02304f8",
+      "href": null,
+      "lifecycleStatus": "launched",
+      "name": "Mobile line",
+      "bundledProductOfferingOption": {
+        "numberRelOfferDefault": 1,
+        "numberRelOfferLowerLimit": 1,
+        "numberRelOfferUpperLimit": 1,
+        "@baseType": null,
+        "@schemaLocation": null,
+        "@type": null
+      },
+      "@baseType": null,
+      "@schemaLocation": null,
+      "@type": "AtomicProductOffering"
+    },
+    {
+      "id": "2dec43da-fb5c-4c97-8766-f17a1d1b2aff",
+      "href": null,
+      "lifecycleStatus": "launched",
+      "name": "connectivity",
+      "bundledProductOfferingOption": {
+        "numberRelOfferDefault": 1,
+        "numberRelOfferLowerLimit": 1,
+        "numberRelOfferUpperLimit": 1,
+        "@baseType": null,
+        "@schemaLocation": null,
+        "@type": null
+      },
+      "@baseType": null,
+      "@schemaLocation": null,
+      "@type": "AtomicProductOffering"
+    },
+    {
+      "id": "9078f148-f0f6-4209-be22-b21981b6709b",
+      "href": null,
+      "lifecycleStatus": "launched",
+      "name": "Time Bundle",
+      "bundledProductOfferingOption": {
+        "numberRelOfferDefault": 1,
+        "numberRelOfferLowerLimit": 1,
+        "numberRelOfferUpperLimit": 1,
+        "@baseType": null,
+        "@schemaLocation": null,
+        "@type": null
+      },
+      "@baseType": null,
+      "@schemaLocation": null,
+      "@type": "AtomicProductOffering"
+    },
+    {
+      "id": "8b505421-c361-4c77-a168-debf87ee7172",
+      "href": null,
+      "lifecycleStatus": "launched",
+      "name": "Sim Card",
+      "bundledProductOfferingOption": {
+        "numberRelOfferDefault": 1,
+        "numberRelOfferLowerLimit": 1,
+        "numberRelOfferUpperLimit": 1,
+        "@baseType": null,
+        "@schemaLocation": null,
+        "@type": null
+      },
+      "@baseType": null,
+      "@schemaLocation": null,
+      "@type": "AtomicProductOffering"
+    }
+  ],
+  "category": [],
+  "channel": [
+    {
+      "id": "METAVERSE",
+      "href": null,
+      "name": "METAVERSE",
+      "@baseType": null,
+      "@schemaLocation": null,
+      "@type": null,
+      "@referredType": null
+    },
+    {
+      "id": "Shop",
+      "href": null,
+      "name": "Shop",
+      "@baseType": null,
+      "@schemaLocation": null,
+      "@type": null,
+      "@referredType": null
+    }
+  ],
+  "marketSegment": [
+    {
+      "id": "B2C",
+      "href": null,
+      "name": null,
+      "@baseType": null,
+      "@schemaLocation": null,
+      "@type": null,
+      "@referredType": null
+    }
+  ],
+  "productOfferingTerm": [
+    {
+      "description": "cs",
+      "name": "cs",
+      "duration": {
+        "amount": 12,
+        "units": "Day"
+      },
+      "validFor": {
+        "endDateTime": "1985-04-15T23:20:50.520Z",
+        "startDateTime": "1985-04-15T23:20:50.520Z"
+      },
+      "@baseType": null,
+      "@schemaLocation": null,
+      "@type": null
+    }
+  ],
+  "brand": "Orange",
+  "validFor": {
+    "endDateTime": null,
+    "startDateTime": "2021-05-18T22:00:00.000Z"
+  },
+  "commercialOperation": [],
+  "productOfferingRelationship": [],
+  "globalMinCardinality": 4,
+  "globalMaxCardinality": 4,
+  "@type": "BundleProductOffering",
+  "relatedParty": [
+    {
+      "id": "01",
+      "href": null,
+      "name": null,
+      "role": "role1",
+      "@baseType": null,
+      "@schemaLocation": null,
+      "@type": null,
+      "@referredType": "individual"
+    }
+  ]
+}
