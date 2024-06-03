@@ -204,9 +204,9 @@ router.post('/payOrder', async (req, res) => {
     }
 });
 
-let uc1NotifStatus = {isCompleted: false};
-let uc2NotifStatus = {isCompleted :false};
 
+let uc1NotifStatus = {};
+let uc2NotifStatus = {};
 
 // Route for UC1 notifications
 router.post('/notificationUC1', async (req, res) => {
@@ -241,7 +241,7 @@ router.post('/notificationUC2', async (req, res) => {
             // If UC2 notification is completed for this user, return the completed notification response
             const uc2ResponseNotifResponse = { Status: 'UC2 Notification completed with success' };
             // Reset the UC2 notification status after sending the notification response
-            uc2NotifStatus[username] = { isCompleted: false };
+            uc2NotifStatus[username] = { e: false };
 
             return res.status(200).json(uc2ResponseNotifResponse);
         }

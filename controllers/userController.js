@@ -22,7 +22,9 @@ const signin = async (req, res) => {
         email: user.email,
         username: user.username,
         token: user.token,
-        coins: user.coins
+        coins: user.coins,
+        KPIRoom1: user.Room_1_KPI,
+        KPIRoom2: user.Room_2_KPI
       };
       console.log(user); // Log the type of the received email
 
@@ -55,6 +57,9 @@ const signup = async (req, res) => {
       password,
       username,
       token,
+      Room_1_KPI,
+      Room_2_KPI
+      ,
     });
 
     // Save the user to the database
