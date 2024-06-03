@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const { signin, signup, updateCoins,KPIRoom1,KPIRoom2 } = require('../controllers/userController'); // Import both signin and signup functions
+const { signin, signup, updateCoins,KPIRoom1,KPIRoom2, getUserKPIs } = require('../controllers/userController'); // Import both signin and signup functions
 const Account = require("../models/Account"); // Import the Account model
 
 // Signin route
@@ -47,6 +47,8 @@ router.post('/KPIRoom1', KPIRoom1);
 
 // Route to increment Room_2_KPI
 router.post('/KPIRoom2', KPIRoom2);
+
+router.get('/getUserKPIs', getUserKPIs)
 
 
 module.exports = router;

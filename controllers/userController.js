@@ -22,7 +22,7 @@ const signin = async (req, res) => {
         email: user.email,
         username: user.username,
         token: user.token,
-        coins: user.coins 
+        coins: user.coins
       };
       console.log(user); // Log the type of the received email
 
@@ -110,7 +110,10 @@ const KPIRoom1 = async (req, res) => {
     await user.save();
 
     // Return success response
-    res.status(200).json({ message: 'Room_1_KPI incremented successfully', user });
+    res.status(200).json({
+      message: 'Room_1_KPI incremented successfully', Room_1_KPI: user.Room_1_KPI,
+      Room_2_KPI: user.Room_2_KPI
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Server Error' });
@@ -134,11 +137,37 @@ const KPIRoom2 = async (req, res) => {
     await user.save();
 
     // Return success response
-    res.status(200).json({ message: 'Room_2_KPI incremented successfully', user });
+    res.status(200).json({
+      message: 'Room_2_KPI incremented successfully', Room_1_KPI: user.Room_1_KPI,
+      Room_2_KPI: user.Room_2_KPI
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server Error' });
+  }
+};
+const getUserKPIs = async (req, res) => {
+  try {
+    const { username } = req.body;
+
+    // Find the user by username
+    const user = await Account.findOne({ username });
+
+    // Check if user exists
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Return the user's Room_1_KPI and Room_2_KPI
+    res.status(200).json({
+      message: 'User KPIs retrieved successfully',
+      Room_1_KPI: user.Room_1_KPI,
+      Room_2_KPI: user.Room_2_KPI
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Server Error' });
   }
 };
 
-module.exports = { signin, signup, updateCoins,KPIRoom1,KPIRoom2 };
+module.exports = { signin, signup, updateCoins, KPIRoom1, KPIRoom2, getUserKPIs };
