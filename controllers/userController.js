@@ -57,9 +57,6 @@ const signup = async (req, res) => {
       password,
       username,
       token,
-      Room_1_KPI,
-      Room_2_KPI
-      ,
     });
 
     // Save the user to the database
