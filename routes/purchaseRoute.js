@@ -239,9 +239,63 @@ router.post('/notificationUC2', async (req, res) => {
         // Check if user-specific notification is completed
         if (uc2NotifStatus[username].isCompleted) {
             // If UC2 notification is completed for this user, return the completed notification response
-            const uc2ResponseNotifResponse = { Status: 'UC2 Notification completed with success' };
+            const uc2ResponseNotifResponse = {
+                id: "5c1b0a6c-5ae4-4c1b-ac40-a3209aa63eee",
+                href: `https://poi-integration.apps.fr01.paas.tech.orange/5c1b0a6c-5ae4-4c1b-ac40-a3209aa63eee}`,
+                orderDate: new Date().toISOString(),
+                productOrderItem: [
+                    {
+                        id: "dc105e36-e288-47f5-894d-0b422f85e54f",
+                        quantity: 1,
+                        action: "add",
+                        productOffering: {
+                            id: "5c1b0a6c-5ae4-4c1b-ac40-a3209aa63eee",
+                            name: "Mobile Package 1",
+                            "@type": "Contract"
+                        },
+                        bundledProductOffering: [
+                            {
+                                id: "a2s2qsd4qs4d-d1sq1d1qs5d-zezeae",
+                                name: "Mobile Line"
+                            },
+                            {
+                                id: "a2s2qsd4qs4zzd-d1sq1d1qs5d-zezeae",
+                                name: "Connectivity"
+                            },
+                            {
+                                id: "a2s2qsd4es4d-d1sq1d1qs5d-zezeae",
+                                name: "Time Bundle"
+                            },
+                            {
+                                id: "a2s2qsd4qs4d-d1sq1da1qs5d-zezeae",
+                                name: "Sim Card"
+                            },
+                        ],
+                        productOrderItemRelationship: [
+                            {
+                                id: "46df67c7-6a0d-450c-a327-4b6563742ce7",
+                                relationshipType: "bundles"
+                            }
+                        ],
+                        state: "completed",
+                        "@type": "ProductOrderItem",
+                        isInstallable: true
+                    }
+                ],
+                relatedParty: [
+                    {
+                        id: req.body.ID_ORANGE,
+                        name: req.body.username,
+                        role: "customer",
+                        "@referredType": "individual"
+                    }
+                ],
+                state: "completed",
+                "@type": "ProductOrder"
+                // Construct your mocked notification response here
+            };
             // Reset the UC2 notification status after sending the notification response
-            uc2NotifStatus[username] = { e: false };
+            uc2NotifStatus[username] = { isCompleted: false };
 
             return res.status(200).json(uc2ResponseNotifResponse);
         }
