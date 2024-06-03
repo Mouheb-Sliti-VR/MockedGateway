@@ -203,100 +203,59 @@ router.post('/payOrder', async (req, res) => {
         res.status(500).json({ error: 'Server Error' });
     }
 });
-let uc1NotifStatus = {}; // Object to store UC1 notification completion status for each user
-let notificationStatus = {}; // Object to store notification completion status for each user (UC2)
 
-router.post('/notification', async (req, res) => {
+
+// Route for UC1 notifications
+router.post('/notificationUC1', async (req, res) => {
     try {
         const username = req.body.username;
 
         // Check if uc1NotifStatus is completed for the user
         if (uc1NotifStatus[username].isCompleted) {
             // If UC1 notification is completed for this user, return the completed notification response
-            const uc1ResponseNotif = { Status: 'Notification completed with success' };
+            const uc1ResponseNotifResponse = { Status: 'UC1 Notification completed with success' };
             // Reset the UC1 notification status after sending the notification response
             uc1NotifStatus[username] = { isCompleted: false };
 
-            return res.status(200).json(uc1ResponseNotif);
+            return res.status(200).json(uc1ResponseNotifResponse);
         }
 
-        // Check if user-specific notification is completed
-        if (notificationStatus[username].isCompleted) {
-            // If user-specific notification is completed, return the completed notification response
-            const mockedNotifResponse = {
-                id: "5c1b0a6c-5ae4-4c1b-ac40-a3209aa63eee",
-                href: `https://poi-integration.apps.fr01.paas.tech.orange/5c1b0a6c-5ae4-4c1b-ac40-a3209aa63eee}`,
-                orderDate: new Date().toISOString(),
-                productOrderItem: [
-                    {
-                        id: "dc105e36-e288-47f5-894d-0b422f85e54f",
-                        quantity: 1,
-                        action: "add",
-                        productOffering: {
-                            id: "5c1b0a6c-5ae4-4c1b-ac40-a3209aa63eee",
-                            name: "Mobile Package 1",
-                            "@type": "Contract"
-                        },
-                        bundledProductOffering: [
-                            {
-                                id: "a2s2qsd4qs4d-d1sq1d1qs5d-zezeae",
-                                name: "Mobile Line"
-                            },
-                            {
-                                id: "a2s2qsd4qs4zzd-d1sq1d1qs5d-zezeae",
-                                name: "Connectivity"
-                            },
-                            {
-                                id: "a2s2qsd4es4d-d1sq1d1qs5d-zezeae",
-                                name: "Time Bundle"
-                            },
-                            {
-                                id: "a2s2qsd4qs4d-d1sq1da1qs5d-zezeae",
-                                name: "Sim Card"
-                            }
-                        ],
-                        productOrderItemRelationship: [
-                            {
-                                id: "46df67c7-6a0d-450c-a327-4b6563742ce7",
-                                relationshipType: "bundles"
-                            }
-                        ],
-                        state: "completed",
-                        "@type": "ProductOrderItem",
-                        isInstallable: true
-                    }
-                ],
-                relatedParty: [
-                    {
-                        id: req.body.ID_ORANGE,
-                        name: req.body.username,
-                        role: "customer",
-                        "@referredType": "individual"
-                    }
-                ],
-                state: "completed",
-                "@type": "ProductOrder"
-            };
-            // Reset the user-specific notification status after sending the notification response
-            notificationStatus[username] = { isCompleted: false };
-
-            return res.status(200).json(mockedNotifResponse);
-        }
-
-        // If neither UC1 nor user-specific notifications are completed, return no notifications
-        return res.status(200).json({ message: "No order notifications for now" });
+        // If UC1 notification is not completed, return no notifications
+        return res.status(200).json({ message: "No UC1 notifications for now" });
     } catch (error) {
-        console.error('Error processing the notification request:', error);
+        console.error('Error processing the UC1 notification request:', error);
         res.status(500).json({ error: 'Server Error' });
     }
 });
 
-router.post('/completeNotification', async (req, res) => {
+// Route for UC2 notifications
+router.post('/notificationUC2', async (req, res) => {
     try {
         const username = req.body.username;
 
+        // Check if user-specific notification is completed
+        if (uc2NotifStatus[username].isCompleted) {
+            // If UC2 notification is completed for this user, return the completed notification response
+            const uc2ResponseNotifResponse = { Status: 'UC2 Notification completed with success' };
+            // Reset the UC2 notification status after sending the notification response
+            uc2NotifStatus[username] = { isCompleted: false };
+
+            return res.status(200).json(uc2ResponseNotifResponse);
+        }
+
+        // If UC2 notification is not completed, return no notifications
+        return res.status(200).json({ message: "No UC2 notifications for now" });
+    } catch (error) {
+        console.error('Error processing the UC2 notification request:', error);
+        res.status(500).json({ error: 'Server Error' });
+    }
+});
+
+router.post('/completeUC2Notification', async (req, res) => {
+    try {
+        const username = req.body.username;
         // Set user-specific notification as completed
-        notificationStatus[username] = { isCompleted: true };
+        uc2NotifStatus[username] = { isCompleted: true };
 
         res.status(200).json({ message: "UC2 Notification completed" });
     } catch (error) {
@@ -309,7 +268,6 @@ router.post('/completeNotification', async (req, res) => {
 router.post('/completeUc1Notification', async (req, res) => {
     try {
         const username = req.body.username;
-
         // Set UC1 notification as completed for the user
         uc1NotifStatus[username] = { isCompleted: true };
 
