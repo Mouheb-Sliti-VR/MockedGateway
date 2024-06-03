@@ -204,6 +204,9 @@ router.post('/payOrder', async (req, res) => {
     }
 });
 
+let uc1NotifStatus = {isCompleted: false};
+let uc2NotifStatus = {isCompleted :false};
+
 
 // Route for UC1 notifications
 router.post('/notificationUC1', async (req, res) => {
