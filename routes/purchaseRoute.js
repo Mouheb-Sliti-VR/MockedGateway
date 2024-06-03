@@ -211,7 +211,7 @@ router.post('/notification', async (req, res) => {
         const username = req.body.username;
 
         // Check if uc1NotifStatus is completed for the user
-        if (uc1NotifStatus[username] && uc1NotifStatus[username].isCompleted) {
+        if (uc1NotifStatus[username].isCompleted) {
             // If UC1 notification is completed for this user, return the completed notification response
             const uc1ResponseNotif = { Status: 'Notification completed with success' };
             // Reset the UC1 notification status after sending the notification response
@@ -221,7 +221,7 @@ router.post('/notification', async (req, res) => {
         }
 
         // Check if user-specific notification is completed
-        if (notificationStatus[username] && notificationStatus[username].isCompleted) {
+        if (notificationStatus[username].isCompleted) {
             // If user-specific notification is completed, return the completed notification response
             const mockedNotifResponse = {
                 id: "5c1b0a6c-5ae4-4c1b-ac40-a3209aa63eee",
@@ -277,7 +277,6 @@ router.post('/notification', async (req, res) => {
                 state: "completed",
                 "@type": "ProductOrder"
             };
-
             // Reset the user-specific notification status after sending the notification response
             notificationStatus[username] = { isCompleted: false };
 
@@ -320,7 +319,6 @@ router.post('/completeUc1Notification', async (req, res) => {
         res.status(500).json({ error: 'Server Error' });
     }
 });
-
 
 
 module.exports = router;
