@@ -2,7 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const { processJsonRouteHandler } = require('./controllers/jsonHandler.js');
+
+app.use(cors());
 
 const app = express();
 const port = process.env.PORT || 3000;
