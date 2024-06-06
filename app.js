@@ -5,10 +5,11 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const { processJsonRouteHandler } = require('./controllers/jsonHandler.js');
 
-app.use(cors());
 
 const app = express();
 const port = process.env.PORT || 3000;
+app.use(cors());
+
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
