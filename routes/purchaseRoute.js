@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios'); // Import axios for making HTTP requests
 
+const https = require('https');
+
 //request to handle buy action
 router.post('/buy', async (req, res) => {
     try {
@@ -335,12 +337,14 @@ router.post('/completeUc1Notification', async (req, res) => {
     }
 });
 
-const httpsAgent = new https.Agent({
-    rejectUnauthorized: false, // This will bypass SSL certificate validation
-});
+
 
 router.post('/roomPermission', async (req, res) => {
     try {
+
+        const httpsAgent = new https.Agent({
+            rejectUnauthorized: false, // This will bypass SSL certificate validation
+        });
         const customerId = req.body.customerId;
         const name = req.body.name;
 
