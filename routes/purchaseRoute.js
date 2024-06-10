@@ -376,7 +376,7 @@ router.post('/roomPermission', async (req, res) => {
 
         // Log the success response
         console.log('Success:', response.data);
-        console.log(responsee.data.authorizationStatus.code);
+       //console.log(response.data.authorizationStatus.code);
         if (response.data.authorizationStatus.code == 200) {
             // Send the data received from the external API in the response to the client
             res.status(200).json({ "message": "success " });
