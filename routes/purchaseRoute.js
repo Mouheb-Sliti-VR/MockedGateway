@@ -341,10 +341,6 @@ router.post('/completeUc1Notification', async (req, res) => {
 
 router.post('/roomPermission', async (req, res) => {
     try {
-
-        const httpsAgent = new https.Agent({
-            rejectUnauthorized: false, // This will bypass SSL certificate validation
-        });
         const customerId = req.body.customerId;
         const name = req.body.name;
 
@@ -362,23 +358,38 @@ router.post('/roomPermission', async (req, res) => {
             "agentId": "orange_vod_metaverse"
         };
 
-        // Make POST request to another backend endpoint for payment using the custom axios instance
-        const response = await axios.post('https://distributed-rating-integration.cosmonic.app/usage/rating', payload, { httpsAgent });
-        
+        // Create a custom HTTPS agent with SSL verification disabled
+        const agent = new https.Agent({
+            rejectUnauthorized: false
+        });
+
+        // Add application header JSON
+        const headers = {
+            'Content-Type': 'application/json'
+        };
+
+        // Make POST request to another backend endpoint for payment
+        const response = await axios.post('https://distributed-rating-integration.cosmonic.app/usage/rating', payload, { 
+            httpsAgent: agent,
+            headers: headers
+        });
+
         // Log the success response
         console.log('Success:', response.data);
-        if (response.data["key"] == "This user is authorized to use this service") {
+        if (response.data["key"] === "This user is authorized to use this service") {
             // Send the data received from the external API in the response to the client
             res.status(200).json({ "message": "success " });
         } else {
             res.status(201).json({ "message": "failed" });
         }
+
     } catch (error) {
         // Log and handle errors
-        console.error('Error processing the payOrder request:', error);
+        console.error('Error processing the roomPermission request:', error);
         res.status(500).json({ error: 'Server Error' });
     }
 });
+
 
 
 
