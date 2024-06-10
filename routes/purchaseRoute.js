@@ -335,6 +335,48 @@ router.post('/completeUc1Notification', async (req, res) => {
     }
 });
 
+router.post('/roomPermession', async (req, res) => {
+    try {
+        const customerId = req.body.customerId;
+        const name = req.body.name;
+
+        const payload = {
+            "customerId": customerId,
+            "usage": {
+                "usageCharacteristicList": [
+                    {
+                        "name": name,
+                        "value": "1",
+                        "valueType": "integer"
+                    }
+                ]
+            },
+            "agentId": "orange_vod_metaverse"
+        }
+
+
+        // Make POST request to another backend endpoint for payment
+        const response = await axios.post('https://distributed-rating-integration.cosmonic.app/usage/rating', payload);
+        // Log the success response
+        console.log('Success:', response.data);
+        if (response.data["key"] == "This user is authorized to use this service") {
+            // Send the data received from the external API in the response to the client
+            res.status(200).json({ "message": "success " });
+        }
+        else
+            res.status(201).json({ "message": "failed" });
+
+
+    } catch (error) {
+        // Log and handle errors
+        console.error('Error processing the payOrder request:', error);
+        res.status(500).json({ error: 'Server Error' });
+    }
+
+})
+
+
+
 
 module.exports = router;
 
