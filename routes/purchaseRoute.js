@@ -376,7 +376,8 @@ router.post('/roomPermission', async (req, res) => {
 
         // Log the success response
         console.log('Success:', response.data);
-        if (response.data["key"] === "This user is authorized to use this service") {
+        console.log(response.authorizationStatus.key);
+        if (response.authorizationStatus.key === "This user is authorized to use this service") {
             // Send the data received from the external API in the response to the client
             res.status(200).json({ "message": "success " });
         } else {
@@ -389,8 +390,6 @@ router.post('/roomPermission', async (req, res) => {
         res.status(500).json({ error: 'Server Error' });
     }
 });
-
-
 
 
 
