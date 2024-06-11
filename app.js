@@ -30,6 +30,9 @@ mongoose.connect(process.env.mongoURI)
 
     // Route for processing JSON data
     app.get('/processJson', processJsonRouteHandler);
+    app.get("/health-check", (req, res) => {
+      res.status(200).send("up");
+    });
 
     // Start the server
     app.listen(port, () => {
